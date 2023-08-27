@@ -11,13 +11,7 @@ const ContactUs = () => {
         <Row>
           <Col md={6}>
             <h1>Sourabh kakani</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptate, perferendis incidunt amet eveniet eius voluptas quis
-              voluptates ipsum unde repellat facere? Expedita magni ipsa quia
-              ducimus eveniet. Quae, blanditiis. Voluptatum magni iure sunt. A
-              omnis soluta ipsa id excepturi necessitatibus.
-            </p>
+            <p>We are here to help you 24 X 7.</p>
 
             <Table
               bordered
