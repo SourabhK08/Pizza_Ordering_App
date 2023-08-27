@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
+import Policy from "./components/Policy";
 
 function App() {
   return (
@@ -26,6 +27,14 @@ function App() {
           element={
             <Container>
               <ContactUs />
+            </Container>
+          }
+        ></Route>
+        <Route
+          path="/policy"
+          element={
+            <Container>
+              <Policy />
             </Container>
           }
         ></Route>
