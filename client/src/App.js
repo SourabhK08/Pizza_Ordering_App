@@ -7,6 +7,7 @@ import ContactUs from "./components/ContactUs";
 import Policy from "./components/Policy";
 import NavBar2 from "./components/NavBar2";
 import HomeScreen from "./screens/HomeScreen";
+import CartScreen from "./screens/CartScreen";
 
 function App() {
   return (
@@ -46,6 +47,14 @@ function App() {
           element={
             <Container>
               <HomeScreen />
+            </Container>
+          }
+        ></Route>
+        <Route
+          path="/cart"
+          element={
+            <Container>
+              <CartScreen />
             </Container>
           }
         ></Route>
