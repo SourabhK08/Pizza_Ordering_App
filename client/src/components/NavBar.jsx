@@ -26,7 +26,7 @@ const NavBar = () => {
               <Nav.Link>Contact Us</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/policy">
-              <Nav.Link>terms & policy</Nav.Link>
+              <Nav.Link>terms & conditions</Nav.Link>
             </LinkContainer>
           </Nav>
         </Container>
