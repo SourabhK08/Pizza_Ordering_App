@@ -6,6 +6,7 @@ import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import Policy from "./components/Policy";
 import NavBar2 from "./components/NavBar2";
+import HomeScreen from "./screens/HomeScreen";
 
 function App() {
   return (
@@ -37,6 +38,14 @@ function App() {
           element={
             <Container>
               <Policy />
+            </Container>
+          }
+        ></Route>
+        <Route
+          path="/"
+          element={
+            <Container>
+              <HomeScreen />
             </Container>
           }
         ></Route>
