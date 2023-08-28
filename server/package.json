@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server side of Pizza ordering app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SourabhK08/Pizza_Ordering_App.git"
+  },
+  "author": "Sourabh kakani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SourabhK08/Pizza_Ordering_App/issues"
+  },
+  "homepage": "https://github.com/SourabhK08/Pizza_Ordering_App#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  }
+}
