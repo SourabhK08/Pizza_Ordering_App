@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 
 const Pizza = ({ pi }) => {
   const [v, setV] = useState("small"); //varient
+  const [ingredients, setIngredients] = useState("Cheese Brust");
   const [quantity, setQuantity] = useState(0);
 
   {
@@ -46,15 +47,31 @@ const Pizza = ({ pi }) => {
                   ))}{" "}
                 </select>
               </Col>
+              <Col md={8}>
+                <br />
+                <h6>Ingredients</h6>
+                <select
+                  value={ingredients}
+                  onChange={(e) => setIngredients(e.target.value)}
+                >
+                  {" "}
+                  {pi.ingredients.map((ingredients) => (
+                    <option> {ingredients} </option>
+                  ))}{" "}
+                </select>
+              </Col>
+
               {/* <Col md={6}>
                 <h6>Price</h6>
-                <select name="" id="">
+                <select >
                   {pi.prices.map((p) => (
                     <option value={p}> {p} </option>
                   ))}{" "}
                 </select>
               </Col> */}
+
               <Col md={6}>
+                <br />
                 <h6>Quantity</h6>
                 <select
                   value={quantity}
@@ -70,7 +87,8 @@ const Pizza = ({ pi }) => {
           </Card.Text>
           <Row>
             <Col md={6}>
-              Price : <LiaRupeeSignSolid /> {pi.prices[0][v] * quantity}{" "}
+              Price : <LiaRupeeSignSolid />{" "}
+              {(pi.prices[0][v] + pi.prices[1][ingredients]) * quantity}{" "}
             </Col>
             <Col md={6}>
               <Button className="bg-warning text-black"> Add To Cart </Button>{" "}
