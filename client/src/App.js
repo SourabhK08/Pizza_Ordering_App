@@ -8,6 +8,7 @@ import Policy from "./components/Policy";
 import NavBar2 from "./components/NavBar2";
 import HomeScreen from "./screens/HomeScreen";
 import CartScreen from "./screens/CartScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 
 function App() {
   return (
@@ -55,6 +56,14 @@ function App() {
           element={
             <Container>
               <CartScreen />
+            </Container>
+          }
+        ></Route>
+        <Route
+          path="/register"
+          element={
+            <Container>
+              <RegisterScreen />
             </Container>
           }
         ></Route>

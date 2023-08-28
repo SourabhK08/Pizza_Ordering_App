@@ -6,7 +6,7 @@ const AboutUs = () => {
   return (
     <>
       <Container style={{ marginTop: "50px", backgroundColor: "white" }}>
-        <h1 className="text-center">About Us</h1>
+        <h1 style={{ fontWeight: "bold", textAlign: "center" }}>About Us</h1>
         <hr />
         <Row>
           <Col md={4}>

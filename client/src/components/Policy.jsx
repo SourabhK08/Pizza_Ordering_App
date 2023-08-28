@@ -5,7 +5,10 @@ const Policy = () => {
   return (
     <>
       <Container style={{ marginTop: "50px" }}>
-        <h1 className="text-center">Terms and Conditions</h1>
+        <h1 style={{ fontWeight: "bold", textAlign: "center" }}>
+          Terms and Conditions
+        </h1>
+        <hr />
         <Row>
           <Col md={12}>
             <h5>Modify/Cancel The Online Order</h5>

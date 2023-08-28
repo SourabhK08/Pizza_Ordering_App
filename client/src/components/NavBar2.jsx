@@ -23,7 +23,7 @@ function NavBar2() {
             <LinkContainer to="/login">
               <Nav.Link>Login</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/registration">
+            <LinkContainer to="/register">
               <Nav.Link>Register</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/cart">

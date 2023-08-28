@@ -8,6 +8,8 @@ const ContactUs = () => {
   return (
     <>
       <Container style={{ marginTop: "50px" }}>
+        <h1 style={{ fontWeight: "bold", textAlign: "center" }}>Contact Us</h1>
+        <hr />
         <Row>
           <Col md={6}>
             <h1>Sourabh kakani</h1>
@@ -71,9 +73,12 @@ const ContactUs = () => {
               </tbody>
             </Table>
           </Col>
-        </Row>
-        <Row>
-          <Col md={6} style={{ display: "flex", flexDirection: "column" }}>
+          <Col
+            md={6}
+            style={{
+              marginTop: "85px",
+            }}
+          >
             <Image src="images/contact.jpg" />
           </Col>
         </Row>
