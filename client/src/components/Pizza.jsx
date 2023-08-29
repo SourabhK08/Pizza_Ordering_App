@@ -5,10 +5,29 @@ import { Row, Col } from "react-bootstrap";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 import Modal from "react-bootstrap/Modal";
 
-const Pizza = ({ pi }) => {
+import useStore from "./Store";
+
+const Pizza = ({ pi, i, setItems, setVarient, setP }) => {
+  {
+    /*   USE OF ZUSTAND  */
+  }
+  const brand_name = useStore((state) => state.brand_name);
+  console.log(brand_name);
+
+  const varient = useStore((state) => state.varient);
+  const varient_fn = useStore((state) => state.varient_fn);
+
   const [v, setV] = useState("small"); //varient
-  const [ingredients, setIngredients] = useState("Cheese Brust");
+  const [ingredients, setIngredients] = useState([]);
   const [quantity, setQuantity] = useState(0);
+  const [price, setPrice] = useState(0);
+
+  const handleItemSelected = (selectedItem) => {
+    setIngredients((prevItems) => [...prevItems, selectedItem]);
+    setPrice((prevItems) => prevItems + pi.prices[1][selectedItem]);
+  };
+  //console.log(price);
+  // console.log(ingredients  );
 
   {
     /* for modals */
@@ -17,6 +36,15 @@ const Pizza = ({ pi }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  function handleButton(e) {
+    e.preventDefault();
+    setItems(ingredients);
+    setVarient(v);
+    // setP(price);
+  }
+
+  // function handleChange(e) {}
 
   return (
     <>
@@ -40,25 +68,43 @@ const Pizza = ({ pi }) => {
             <Row>
               <Col md={6}>
                 <h6>Varients</h6>
-                <select value={v} onChange={(e) => setV(e.target.value)}>
+                <select
+                  value={varient[i]}
+                  onChange={(e) => varient_fn(i, e.target.value)}
+                >
                   {" "}
                   {pi.varients.map((v) => (
                     <option> {v} </option>
                   ))}{" "}
                 </select>
               </Col>
+
               <Col md={8}>
                 <br />
                 <h6>Ingredients</h6>
                 <select
                   value={ingredients}
-                  onChange={(e) => setIngredients(e.target.value)}
+                  onChange={(e) => handleItemSelected(e.target.value)}
                 >
                   {" "}
                   {pi.ingredients.map((ingredients) => (
                     <option> {ingredients} </option>
                   ))}{" "}
                 </select>
+              </Col>
+              <Col md={8}>
+                <br />
+                <h6>Ingredients</h6>
+                {ingredients.map((item) => {
+                  return (
+                    <>
+                      {" "}
+                      <Button variant="dark" style={{ margin: "5px" }}>
+                        {item}
+                      </Button>{" "}
+                    </>
+                  );
+                })}
               </Col>
 
               {/* <Col md={6}>
@@ -88,10 +134,13 @@ const Pizza = ({ pi }) => {
           <Row>
             <Col md={6}>
               Price : <LiaRupeeSignSolid />{" "}
-              {(pi.prices[0][v] + pi.prices[1][ingredients]) * quantity}{" "}
+              {(pi.prices[0][v] + parseInt(price)) * quantity}{" "}
             </Col>
             <Col md={6}>
-              <Button className="bg-warning text-black"> Add To Cart </Button>{" "}
+              <Button className="bg-warning text-black" onClick={handleButton}>
+                {" "}
+                Add To Cart{" "}
+              </Button>{" "}
             </Col>
           </Row>
         </Card.Body>

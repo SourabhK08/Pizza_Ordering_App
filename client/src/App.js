@@ -9,8 +9,16 @@ import NavBar2 from "./components/NavBar2";
 import HomeScreen from "./screens/HomeScreen";
 import CartScreen from "./screens/CartScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import { useState } from "react";
+import LoginScreen from "./screens/LoginScreen";
 
 function App() {
+  const [items, setItems] = useState([]);
+  const [varient, setVarient] = useState([]);
+  const [p, setP] = useState([]);
+  //console.log(items);
+  console.log(p);
+
   return (
     <BrowserRouter>
       {" "}
@@ -27,6 +35,7 @@ function App() {
             </Container>
           }
         ></Route>
+
         <Route
           path="/contact"
           element={
@@ -35,6 +44,7 @@ function App() {
             </Container>
           }
         ></Route>
+
         <Route
           path="/policy"
           element={
@@ -43,27 +53,46 @@ function App() {
             </Container>
           }
         ></Route>
+
         <Route
           path="/"
           element={
             <Container>
-              <HomeScreen />
+              <HomeScreen
+                setItems={setItems}
+                items={items}
+                varient={varient}
+                setVarient={setVarient}
+                p={p}
+                setP={setP}
+              />
             </Container>
           }
         ></Route>
+
         <Route
           path="/cart"
           element={
             <Container>
-              <CartScreen />
+              <CartScreen items={items} varient={varient} p={p} />
             </Container>
           }
         ></Route>
+
         <Route
           path="/register"
           element={
             <Container>
               <RegisterScreen />
+            </Container>
+          }
+        ></Route>
+
+        <Route
+          path="/login"
+          element={
+            <Container>
+              <LoginScreen />
             </Container>
           }
         ></Route>

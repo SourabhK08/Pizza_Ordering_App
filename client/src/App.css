@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+
+.form-input input{
+ width: 70%;
+ padding: 8px 15px;
+ margin: 8px 0;
+ display: inline-block;
+ border: 1px solid #ccc;
+ border-radius: 7px;
+ box-sizing: border-box;
+}
+
+.form-btn{
+  color: #ccc;
+  padding: 14px 20px;
+  margin: 9px 0;
+  cursor: pointer;
+  font-size: large;
+  font-weight: bold;
+}
+
+.form-btn:hover{
+  zoom: 110%;
+}
+
+
+
+

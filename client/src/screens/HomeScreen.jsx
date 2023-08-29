@@ -3,14 +3,23 @@ import AllPizzas from "../pizza-data";
 import { Container, Row, Col } from "react-bootstrap";
 import Pizza from "../components/Pizza";
 
-const HomeScreen = () => {
+const HomeScreen = ({ items, setItems, varient, setVarient, p, setP }) => {
   return (
     <>
       <Container>
         <Row>
-          {AllPizzas.map((pizza) => (
+          {AllPizzas.map((pizza, i) => (
             <Col md={4}>
-              <Pizza pi={pizza} />{" "}
+              <Pizza
+                pi={pizza}
+                i={i}
+                items={items}
+                setItems={setItems}
+                varient={varient}
+                setVarient={setVarient}
+                p={p}
+                setP={setP}
+              />{" "}
               {/* as a prop we are passing (pi) into pizza component , storing purpose*/}
             </Col>
           ))}
