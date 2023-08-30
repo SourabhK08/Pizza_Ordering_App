@@ -9,7 +9,6 @@ export default function Form() {
   const [flag, setFlag] = useState(false);
 
   useEffect(() => {
-    toast.success("Registered");
     console.log("Registered");
   }, [flag]);
 
@@ -28,23 +27,13 @@ export default function Form() {
     ) {
       toast.error("All Fields Are Mandatory !");
     } else {
+      toast.success("Congratulations! Successfully Registered");
       setFlag(true);
     }
   }
 
   return (
     <>
-      <pre>
-        {" "}
-        {flag ? (
-          <h2 className="ui-define">
-            Hello {inputData.name}, you've registered successfully{" "}
-          </h2>
-        ) : (
-          ""
-        )}{" "}
-      </pre>
-
       <form
         className="container"
         onSubmit={handleSubmit}

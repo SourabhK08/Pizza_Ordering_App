@@ -22,6 +22,7 @@ const LoginScreen = () => {
     if (!inputData.email || !inputData.password) {
       toast.error("All Fields Are Mandatory !");
     } else {
+      toast.success("Congratulations! Successfully Logged In");
       setFlag(true);
     }
   }
