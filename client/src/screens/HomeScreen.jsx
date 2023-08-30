@@ -13,7 +13,7 @@ const HomeScreen = ({ items, setItems, varient, setVarient, p, setP }) => {
               <Pizza
                 pi={pizza}
                 i={i}
-                items={items}
+                item={items}
                 setItems={setItems}
                 varient={varient}
                 setVarient={setVarient}

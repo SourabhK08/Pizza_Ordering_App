@@ -3,7 +3,7 @@ import useStore from "../components/Store";
 import { Container, Row, Col } from "react-bootstrap";
 const CartScreen = ({ items, p }) => {
   const varient = useStore((state) => state.varient);
-
+  console.log(varient);
   return (
     <>
       <Container>

@@ -1,12 +1,25 @@
 import create from "zustand";
 
 const useStore = create((set) => ({
-  varient: ["small", "small", "small", "small", "small", "small"],
+  varient: [],
   ingrdients: [],
   quantity: 0,
   index: [],
+  selectedItems: [],
 
   // Functions
+
+  addToSelected: (item) => {
+    set((state) => ({
+      selectedItems: [...state.selectedItems, item],
+    }));
+  },
+
+  removeFromSelected: (item) => {
+    set((state) => ({
+      selectedItems: state.selectedItems.filter((i) => i !== item),
+    }));
+  },
 
   varient_fn: (index, newVariant) => {
     set((state) => {

@@ -7,12 +7,10 @@ import Modal from "react-bootstrap/Modal";
 
 import useStore from "./Store";
 
-const Pizza = ({ pi, i, setItems, setVarient, setP }) => {
+const Pizza = ({ pi, item, setItems, setVarient, setP }) => {
   {
     /*   USE OF ZUSTAND  */
   }
-  const brand_name = useStore((state) => state.brand_name);
-  console.log(brand_name);
 
   const varient = useStore((state) => state.varient);
   const varient_fn = useStore((state) => state.varient_fn);
@@ -44,6 +42,21 @@ const Pizza = ({ pi, i, setItems, setVarient, setP }) => {
     // setP(price);
   }
 
+  const addToSelected = useStore((state) => state.addToSelected);
+  const removeFromSelected = useStore((state) => state.removeFromSelected);
+  const selectedItems = useStore((state) => state.selectedItems);
+
+  const handleDropdownChange = (item, newSize) => {
+    const updatedItem = { ...item, size: newSize };
+
+    if (selectedItems.some((i) => i.id === item.id)) {
+      removeFromSelected(item);
+      addToSelected(updatedItem);
+    }
+  };
+
+  console.log("pi", pi);
+
   // function handleChange(e) {}
 
   return (
@@ -69,20 +82,19 @@ const Pizza = ({ pi, i, setItems, setVarient, setP }) => {
               <Col md={6}>
                 <h6>Varients</h6>
                 <select
-                  value={varient[i]}
-                  onChange={(e) => varient_fn(i, e.target.value)}
+                  value={pi.size}
+                  onChange={(e) => handleDropdownChange(pi, e.target.value)}
                 >
-                  {" "}
-                  {pi.varients.map((v) => (
-                    <option> {v} </option>
-                  ))}{" "}
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
                 </select>
               </Col>
 
               <Col md={8}>
                 <br />
                 <h6>Ingredients</h6>
-                <select
+                {/* <select
                   value={ingredients}
                   onChange={(e) => handleItemSelected(e.target.value)}
                 >
@@ -90,7 +102,7 @@ const Pizza = ({ pi, i, setItems, setVarient, setP }) => {
                   {pi.ingredients.map((ingredients) => (
                     <option> {ingredients} </option>
                   ))}{" "}
-                </select>
+                </select> */}
               </Col>
               <Col md={8}>
                 <br />

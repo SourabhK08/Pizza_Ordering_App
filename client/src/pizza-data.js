@@ -1,7 +1,7 @@
 const pizzas = [
   {
     name: "Margherita",
-    varients: ["small", "medium", "large"],
+    varients: "small",
     prices: [
       {
         small: 99,
@@ -19,20 +19,12 @@ const pizzas = [
         Black_Olive: 60,
       },
     ],
-    ingredients: [
-      "Grilled_Mushrooms",
-      "Onion",
-      "Crisp_Capiscum",
-      "Fresh_Tomato",
-      "Panner",
-      "Red_Pepper",
-      "Jalapeno",
-      "Black_Olive",
-    ],
+    ingredients: "paneer",
     category: "veg",
     image: "/images/margherita.jpg",
     description: "Classic delight with 100% real mozzarella cheese",
   },
+
   {
     name: "Farmhouse",
     varients: ["small", "medium", "large"],
