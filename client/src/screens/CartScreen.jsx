@@ -41,27 +41,13 @@ const CartScreen = () => {
                     <h2> Quantity: {item[0].quantity} </h2>
                     <h2> Size: {item[0].size} </h2>
                     <h2> Payment: {item[0].price} </h2>
+                    <h2>Ingi : {item[0].ingredients}</h2>
 
                     <hr />
                   </>
                 ))}
               </Col>
-              {/* <Col md={4}>
-                {selectedItems.map((item) => (
-                  <>
-                    <h6>Ingredients</h6>
-                    <select
-                      value={ingredients}
-                      onChange={(e) => handleItemSelected(e.target.value)}
-                    >
-                      {" "}
-                      {item[0].ingredients.map((ingredients) => (
-                        <option> {ingredients} </option>
-                      ))}{" "}
-                    </select>
-                  </>
-                ))}
-              </Col> */}
+
               <Button onClick={handleButton}>Addd</Button>
             </Row>
           </Card.Text>

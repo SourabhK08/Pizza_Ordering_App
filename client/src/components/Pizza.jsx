@@ -17,6 +17,7 @@ const Pizza = ({ pi, setConfig, config, i }) => {
     price: 0,
     quantity: 0,
     size: "",
+    ingredients: "",
   });
 
   const handleUpdate = (type, value) => {
@@ -29,9 +30,15 @@ const Pizza = ({ pi, setConfig, config, i }) => {
       updatedItemData.quantity = value;
     } else if (type === "size") {
       updatedItemData.size = value;
+    } else if (type === "ingredients") {
+      updatedItemData.ingredients = value;
     }
 
-    if (updatedItemData.quantity !== 0 && updatedItemData.size !== "") {
+    if (
+      updatedItemData.quantity !== 0 &&
+      updatedItemData.size !== "" &&
+      updatedItemData.ingredients !== ""
+    ) {
       // console.log("Quantity:  ", updatedItemData.quantity);
       // console.log("Size:", updatedItemData.size);
 
@@ -44,7 +51,14 @@ const Pizza = ({ pi, setConfig, config, i }) => {
       } else if (updatedItemData.size === "large") {
         calculatedPrice = updatedItemData.quantity * 399;
       }
-      updatedItemData.price = calculatedPrice;
+
+      let cost;
+      if (updatedItemData.ingredients === "onion") {
+        cost = updatedItemData.quantity + 60;
+      } else if (updatedItemData.ingredients === "panner") {
+        cost = updatedItemData.quantity + 100;
+      }
+      updatedItemData.price = calculatedPrice + cost;
     }
 
     setItemData(updatedItemData);
@@ -105,6 +119,18 @@ const Pizza = ({ pi, setConfig, config, i }) => {
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
+                </select>
+              </Col>
+
+              <Col md={6}>
+                <h6>Ingredients</h6>
+                <select
+                  value={itemData.size}
+                  onChange={(e) => handleUpdate("ingredients", e.target.value)}
+                >
+                  <option value="">select</option>
+                  <option value="onion">onion</option>
+                  <option value="panner">paneer</option>
                 </select>
               </Col>
 
