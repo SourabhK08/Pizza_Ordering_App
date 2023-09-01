@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import { Row, Col } from "react-bootstrap";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 import Modal from "react-bootstrap/Modal";
+import { toast } from "react-hot-toast";
 
 import useStore from "./Store";
 
@@ -75,9 +76,19 @@ const Pizza = ({ pi, setConfig, config, i }) => {
 
   const addToSelected = useStore((state) => state.addToSelected);
 
-  const addToCart = () => {
-    const item = config.filter((it) => it.id === i);
-    addToSelected(item);
+  const addToCart = (setItemData) => {
+    if (!itemData.quantity || !itemData.size) {
+      toast.error(
+        "Please Select Varient And Quantity Before Adding To The Cart"
+      );
+    } else {
+      const item = config.filter((it) => it.id === i);
+      addToSelected(item);
+
+      toast("Successfully Added To The Cart", {
+        icon: "👏",
+      });
+    }
   };
 
   return (
