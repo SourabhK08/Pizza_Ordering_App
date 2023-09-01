@@ -6,58 +6,74 @@ import { LiaRupeeSignSolid } from "react-icons/lia";
 import Modal from "react-bootstrap/Modal";
 
 import useStore from "./Store";
-
-const Pizza = ({ pi, item, setItems, setVarient, setP }) => {
-  {
-    /*   USE OF ZUSTAND  */
-  }
-
-  const varient = useStore((state) => state.varient);
-  const varient_fn = useStore((state) => state.varient_fn);
-
-  const [v, setV] = useState("small"); //varient
-  const [ingredients, setIngredients] = useState([]);
-  const [quantity, setQuantity] = useState(0);
-  const [price, setPrice] = useState(0);
-
-  const handleItemSelected = (selectedItem) => {
-    setIngredients((prevItems) => [...prevItems, selectedItem]);
-    setPrice((prevItems) => prevItems + pi.prices[1][selectedItem]);
-  };
-  //console.log(price);
-  // console.log(ingredients  );
-
-  {
-    /* for modals */
-  }
+const Pizza = ({ pi, setConfig, config, i }) => {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  function handleButton(e) {
-    e.preventDefault();
-    setItems(ingredients);
-    setVarient(v);
-    // setP(price);
-  }
+  const [itemData, setItemData] = useState({
+    id: i,
+    name: pi.name,
+    price: 0,
+    quantity: 0,
+    size: "",
+  });
 
-  const addToSelected = useStore((state) => state.addToSelected);
-  const removeFromSelected = useStore((state) => state.removeFromSelected);
-  const selectedItems = useStore((state) => state.selectedItems);
+  const handleUpdate = (type, value) => {
+    let updatedItemData = { ...itemData };
 
-  const handleDropdownChange = (item, newSize) => {
-    const updatedItem = { ...item, size: newSize };
+    console.log("Type:", type);
+    console.log("Value:", value);
 
-    if (selectedItems.some((i) => i.id === item.id)) {
-      removeFromSelected(item);
-      addToSelected(updatedItem);
+    if (type === "quantity") {
+      updatedItemData.quantity = value;
+    } else if (type === "size") {
+      updatedItemData.size = value;
+    }
+
+    if (updatedItemData.quantity !== 0 && updatedItemData.size !== "") {
+      // console.log("Quantity:  ", updatedItemData.quantity);
+      // console.log("Size:", updatedItemData.size);
+
+      let calculatedPrice = 0;
+
+      if (updatedItemData.size === "small") {
+        calculatedPrice = updatedItemData.quantity * 99;
+      } else if (updatedItemData.size === "medium") {
+        calculatedPrice = updatedItemData.quantity * 199;
+      } else if (updatedItemData.size === "large") {
+        calculatedPrice = updatedItemData.quantity * 399;
+      }
+      updatedItemData.price = calculatedPrice;
+    }
+
+    setItemData(updatedItemData);
+
+    const containsItemWithId = config.some(
+      (item) => item.id === updatedItemData.id
+    );
+
+    if (containsItemWithId) {
+      const updatedConfig = config.map((item) =>
+        item.id === updatedItemData.id
+          ? {
+              ...item,
+              quantity: updatedItemData.quantity,
+              size: updatedItemData.size,
+              price: updatedItemData.price,
+            }
+          : item
+      );
+      setConfig(updatedConfig);
+    } else {
+      setConfig([...config, updatedItemData]);
     }
   };
-
-  console.log("pi", pi);
-
-  // function handleChange(e) {}
+  const addToSelected = useStore((state) => state.addToSelected);
+  const addToCart = () => {
+    const item = config.filter((it) => it.id === i);
+    addToSelected(item);
+  };
 
   return (
     <>
@@ -65,7 +81,7 @@ const Pizza = ({ pi, item, setItems, setVarient, setP }) => {
         style={{
           width: "20rem",
           marginTop: "50px",
-          border: "solid white   5px",
+          border: "solid white 5px",
         }}
       >
         <Card.Img
@@ -82,74 +98,38 @@ const Pizza = ({ pi, item, setItems, setVarient, setP }) => {
               <Col md={6}>
                 <h6>Varients</h6>
                 <select
-                  value={pi.size}
-                  onChange={(e) => handleDropdownChange(pi, e.target.value)}
+                  value={itemData.size}
+                  onChange={(e) => handleUpdate("size", e.target.value)}
                 >
+                  <option value="">select</option>
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
                 </select>
               </Col>
 
-              <Col md={8}>
-                <br />
-                <h6>Ingredients</h6>
-                {/* <select
-                  value={ingredients}
-                  onChange={(e) => handleItemSelected(e.target.value)}
-                >
-                  {" "}
-                  {pi.ingredients.map((ingredients) => (
-                    <option> {ingredients} </option>
-                  ))}{" "}
-                </select> */}
-              </Col>
-              <Col md={8}>
-                <br />
-                <h6>Ingredients</h6>
-                {ingredients.map((item) => {
-                  return (
-                    <>
-                      {" "}
-                      <Button variant="dark" style={{ margin: "5px" }}>
-                        {item}
-                      </Button>{" "}
-                    </>
-                  );
-                })}
-              </Col>
-
-              {/* <Col md={6}>
-                <h6>Price</h6>
-                <select >
-                  {pi.prices.map((p) => (
-                    <option value={p}> {p} </option>
-                  ))}{" "}
-                </select>
-              </Col> */}
-
               <Col md={6}>
-                <br />
                 <h6>Quantity</h6>
                 <select
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
+                  onChange={(e) =>
+                    handleUpdate("quantity", parseInt(e.target.value))
+                  }
                 >
                   {[...Array(11).keys()].map((a, index) => (
-                    <option value={a}>{a}</option>
+                    <option value={a} key={index}>
+                      {a}
+                    </option>
                   ))}
                 </select>
-                {/* index + 1  => for showing qt 1 */}
               </Col>
             </Row>
           </Card.Text>
           <Row>
             <Col md={6}>
-              Price : <LiaRupeeSignSolid />{" "}
-              {(pi.prices[0][v] + parseInt(price)) * quantity}{" "}
+              Price : <LiaRupeeSignSolid /> {itemData.price}
             </Col>
             <Col md={6}>
-              <Button className="bg-warning text-black" onClick={handleButton}>
+              <Button di className="bg-warning text-black" onClick={addToCart}>
                 {" "}
                 Add To Cart{" "}
               </Button>{" "}
@@ -158,14 +138,13 @@ const Pizza = ({ pi, item, setItems, setVarient, setP }) => {
         </Card.Body>
       </Card>
 
-      {/*Using Modals for giving specific info about pizzas */}
+      {/* Using Modals for giving specific info about pizzas */}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{pi.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {" "}
           <div>
             <Card.Img
               variant="top"
@@ -175,14 +154,13 @@ const Pizza = ({ pi, item, setItems, setVarient, setP }) => {
                 border: "1px solid black",
               }}
             />
-          </div>{" "}
+          </div>
           <hr />
           <div>
             <h5>
-              {" "}
-              <b>Description :-</b>{" "}
+              <b>Description :-</b>
             </h5>
-            <h6>{pi.description} </h6>
+            <h6>{pi.description}</h6>
           </div>
         </Modal.Body>
       </Modal>

@@ -1,28 +1,72 @@
-import React from "react";
+import { React, useState } from "react";
 import useStore from "../components/Store";
-import { Container, Row, Col } from "react-bootstrap";
-const CartScreen = ({ items, p }) => {
-  const varient = useStore((state) => state.varient);
-  console.log(varient);
+import { Container, Row, Col, Button } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import axios from "axios";
+
+const CartScreen = () => {
+  const selectedItems = useStore((state) => state.selectedItems);
+
+  // const [ingredients, setIngredients] = useState([]);
+  // const handleItemSelected = (selectedItem) => {
+  //   setIngredients((prevItems) => [...prevItems, selectedItem]);
+  // };
+
+  const handleButton = () => {
+    axios.get(`http://localhost:3000/user/list`);
+  };
+
   return (
     <>
-      <Container>
-        <Row>
-          <Col md={6}>
-            <h1>My Cart Items</h1>
-            {items.map((items) => (
-              <>
-                <h1> {varient} </h1>
-                <h1> {items} </h1>
-                <h1> {p} </h1>
-              </>
-            ))}
-          </Col>
-          <Col md={4}>
-            <h1>Payment Info</h1>
-          </Col>
-        </Row>
-      </Container>
+      <Card
+        style={{
+          width: "50%",
+          marginTop: "50px",
+          border: "solid white   5px",
+          textAlign: "center",
+        }}
+      >
+        <Card.Body>
+          <Card.Title style={{ fontWeight: "bold", textAlign: "center" }}>
+            {" "}
+            Cart orders{" "}
+          </Card.Title>
+          <hr />
+          <Card.Text>
+            <Row>
+              <Col md={6}>
+                {selectedItems.map((item) => (
+                  <>
+                    <h1> {item[0].name} </h1>
+                    <h2> Quantity: {item[0].quantity} </h2>
+                    <h2> Size: {item[0].size} </h2>
+                    <h2> Payment: {item[0].price} </h2>
+
+                    <hr />
+                  </>
+                ))}
+              </Col>
+              {/* <Col md={4}>
+                {selectedItems.map((item) => (
+                  <>
+                    <h6>Ingredients</h6>
+                    <select
+                      value={ingredients}
+                      onChange={(e) => handleItemSelected(e.target.value)}
+                    >
+                      {" "}
+                      {item[0].ingredients.map((ingredients) => (
+                        <option> {ingredients} </option>
+                      ))}{" "}
+                    </select>
+                  </>
+                ))}
+              </Col> */}
+              <Button onClick={handleButton}>Addd</Button>
+            </Row>
+          </Card.Text>
+        </Card.Body>
+      </Card>
     </>
   );
 };

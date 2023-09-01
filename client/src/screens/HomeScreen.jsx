@@ -1,31 +1,20 @@
-import React from "react";
-import AllPizzas from "../pizza-data";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Pizza from "../components/Pizza";
+import AllPizzas from "../pizza-data";
 
-const HomeScreen = ({ items, setItems, varient, setVarient, p, setP }) => {
+const HomeScreen = () => {
+  const [config, setConfig] = useState([]);
   return (
-    <>
-      <Container>
-        <Row>
-          {AllPizzas.map((pizza, i) => (
-            <Col md={4}>
-              <Pizza
-                pi={pizza}
-                i={i}
-                item={items}
-                setItems={setItems}
-                varient={varient}
-                setVarient={setVarient}
-                p={p}
-                setP={setP}
-              />{" "}
-              {/* as a prop we are passing (pi) into pizza component , storing purpose*/}
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </>
+    <Container>
+      <Row>
+        {AllPizzas.map((pizza, i) => (
+          <Col md={4} key={i}>
+            <Pizza pi={pizza} i={i} config={config} setConfig={setConfig} />
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 
