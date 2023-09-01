@@ -20,7 +20,6 @@ const Pizza = ({ pi, setConfig, config, i }) => {
     price: 0,
     quantity: 0,
     size: "",
-    ingredients: "onion",
   });
 
   const handleUpdate = (type, value) => {
