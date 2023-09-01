@@ -6,24 +6,28 @@ import { LiaRupeeSignSolid } from "react-icons/lia";
 import Modal from "react-bootstrap/Modal";
 
 import useStore from "./Store";
+
 const Pizza = ({ pi, setConfig, config, i }) => {
+  // FOR MODALS
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // FOR CALCULATING QUANTITY AND PRICE
   const [itemData, setItemData] = useState({
     id: i,
     name: pi.name,
     price: 0,
     quantity: 0,
     size: "",
+    ingredients: "onion",
   });
 
   const handleUpdate = (type, value) => {
     let updatedItemData = { ...itemData };
 
-    console.log("Type:", type);
-    console.log("Value:", value);
+    // console.log("Type:", type);
+    // console.log("Value:", value);
 
     if (type === "quantity") {
       updatedItemData.quantity = value;
@@ -69,7 +73,9 @@ const Pizza = ({ pi, setConfig, config, i }) => {
       setConfig([...config, updatedItemData]);
     }
   };
+
   const addToSelected = useStore((state) => state.addToSelected);
+
   const addToCart = () => {
     const item = config.filter((it) => it.id === i);
     addToSelected(item);
